@@ -1,15 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Outlet } from "react-router-dom";
 
 function App() {
-
-return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  )
+  const currentYear = new Date().getFullYear();
+  return (
+    <>
+      <main>
+        <Outlet />
+      </main>
+      <footer className="bg-gray-800 text-white p-4 text-center">
+        <p>
+          © {currentYear} MovieBox By <a href="#" target="blank">Chilaka Destiny</a>
+        </p>
+      </footer>
+    </>
+  );
 }
 
 export default App;

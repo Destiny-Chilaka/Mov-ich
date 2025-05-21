@@ -6,4 +6,35 @@
   font-weight: 400;
 }
 
+/* body {
+  overflow-x: hidden !important;
+}  */
 
+.slick-slider {
+  overflow-x: hidden;
+  /* overflow-y: hidden; */
+  /* Prevent horizontal overflow at the slider level */
+}
+
+.slick-track {
+  display: flex;
+  max-width: 100%;
+  /* Limit track width to container */
+}
+
+.slick-slide {
+  outline: none;
+  /* Remove any focus outline causing width issues */
+}
+
+.slick-dots {
+  bottom: 0px !important;
+}
+
+.slick-dots li button:before{
+  color:white !important;
+}
+
+.thng{
+  color: #000000fb;
+}
