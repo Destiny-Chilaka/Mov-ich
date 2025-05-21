@@ -9,19 +9,12 @@ import MovieDetails from "./pages/MovieDetails";
 // import Login from "./pages/Login";
 import "./index.css";
 
-function AppLayout() {
-  return (
-    <>
-      <Outlet /> {/* Renders the matched child route */}
-    </>
-  );
-}
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<AppLayout />}>
+        <Route path="/" element={<App />}>
           <Route index element={<Home />} />
           <Route path="movies" element={<MovieList />} />
           <Route path="movies/:id" element={<MovieDetails />} />
