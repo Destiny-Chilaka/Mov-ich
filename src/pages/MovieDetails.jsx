@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import PreLoader from "../components/PreLoader";
-import NoImg from "../assets/no-image.png"; // Placeholder image for no image available
-
+import NoImg from "../assets/no-image.png"; 
 function MovieDetail() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
