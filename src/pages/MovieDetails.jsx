@@ -50,7 +50,7 @@ function MovieDetail() {
     return <div className="text-center text-white pt-4">Movie not found.</div>;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-white text-[#333333]">
       <div className="container mx-auto p-4 py-8">
         {/* Trailer or Fallback Image */}
         <div className="relative mb-8">
@@ -78,33 +78,34 @@ function MovieDetail() {
 
         {/* Movie Details */}
         <div className="flex flex-col md:flex-row gap-6">
-          <div className="md:w-1/3">
-            <img
-              src={
-                movie.poster_path
-                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                  : NoImg
-              }
-              alt={movie.title}
-              className="w-full rounded-lg shadow-md"
-            />
-          </div>
           <div className="md:w-2/3">
-            <h1 className="text-4xl font-bold mb-2">{movie.title}</h1>
             <div className="flex items-center space-x-4 mb-4">
-              <span>★ {movie.vote_average.toFixed(1)}/10</span>
-              <span>{movie.release_date?.split("-")[0]}</span>
-              <span>{movie.runtime ? `${movie.runtime} min` : "N/A"}</span>
+              <h1 className="text-3xl font-bold mb-2 inline">{movie.title}</h1>
+              <span className="font-semibold text-xl">
+                • {movie.release_date?.split("-")[0]} •
+              </span>
+              <span className="font-semibold text-xl">
+                {movie.runtime ? `${movie.runtime} min` : "N/A"}
+              </span>
+              <span className="font-semibold text-xl">
+                • Genre •
+              </span>
+              <span>
+                {movie.genres && movie.genres.length > 0
+                  ? movie.genres.map((genre) => (
+                      <span
+                        key={genre.id}
+                        className="border border-[#BE123C] rounded-3xl py-1 px-2 mx-1"
+                      >
+                        {genre.name}
+                      </span>
+                    ))
+                  : "N/A"}
+              </span>
             </div>
             <div className="mb-4">
-              <h2 className="text-xl font-semibold">Genres</h2>
-              <p>
-                {movie.genres?.map((genre) => genre.name).join(", ") || "N/A"}
-              </p>
-            </div>
-            <div className="mb-4">
-              <h2 className="text-xl font-semibold">Overview</h2>
-              <p>{movie.overview || "No overview available."}</p>
+              <h2 className="text-2xl font-semibold">Overview</h2>
+              <p className="text-lg">{movie.overview || "No overview available."}</p>
             </div>
             {movie.production_countries?.length > 0 && (
               <div className="mb-4">
@@ -117,11 +118,18 @@ function MovieDetail() {
               </div>
             )}
             <Link
-              to="/movies"
+              to="/"
               className="inline-block bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
             >
-              Back to Movies
+              Back to Home
             </Link>
+          </div>
+          <div className="md:w-1/3">
+            <span className="pb-2">
+              <span className="text-yellow-400 text-2xl">★</span>{" "}
+              <span className="text-xl">{movie.vote_average.toFixed(1)}</span>
+              /10
+            </span>
           </div>
         </div>
       </div>
