@@ -134,7 +134,7 @@ function HeroHeader({ onLoadingChange }) {
     return <div className="text-center text-red-500 pt-4">{error}</div>;
 
   return (
-    <div className="relative ">
+    <div className="relative dm-sans">
       <Slider {...settings}>
         {movies.map((movie) => (
           <div key={movie.id} className="relative">

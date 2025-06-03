@@ -49,7 +49,7 @@ function PopularMovies({ onLoadingChange }) {
     return <div className="text-center text-red-500 pt-4">{error}</div>;
 
   return (
-    <div className="container mx-auto p-4 py-8">
+    <div className="container mx-auto p-4 py-8 dm-sans">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold text-black">Popular Movies</h2>
         <a href="/movies" className="text-red-600 hover:underline">

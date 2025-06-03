@@ -4,7 +4,7 @@ function Footer() {
   const currentYear = new Date().getFullYear();
   return (
     <>
-      <footer className="bg-gray-800 text-white p-4 text-center">
+      <footer className="bg-white text-gray-500 p-4 text-center dm-sans mt-10">
         <p>
           © {currentYear} MovieBox By{" "}
           <a href="#" target="blank">

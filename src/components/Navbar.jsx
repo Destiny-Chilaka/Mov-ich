@@ -6,6 +6,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import Logo from "../assets/tv.png";
 import { FaBars } from "react-icons/fa";
 
+
 function Navbar() {
   const [user, setUser] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -77,10 +78,10 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-gray-900 p-4 text-white flex justify-between items-center">
+    <nav className="bg-gray-900 p-4 text-white flex justify-between items-center dm-sans">
       <div className=" text-base sm:text-xl font-bold flex items-center">
         <img src={Logo} alt="Logo" className="w-8 h-8 mr-[5px] sm:mr-2" />
-        MovieBox
+        <Link to="/">MovieBox</Link>
       </div>
       <div className="flex items-center ">
         <div className="relative">
@@ -127,7 +128,6 @@ function Navbar() {
             onClick={() => setSearchPopupOpen(true)}
             aria-label="Open search"
           >
-           
             <p>Search</p>
           </button>
         </div>
@@ -137,10 +137,7 @@ function Navbar() {
           {user ? (
             <span className="text-white">{user.displayName || user.email}</span>
           ) : (
-            <Link
-              to="/login"
-              className=" text-white sm:px-2 "
-            >
+            <Link to="/login" className=" text-white sm:px-2 ">
               Sign In
             </Link>
           )}
@@ -223,15 +220,18 @@ function Navbar() {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full bg-white w-64 p-4 shadow-lg transform transition-transform ${
+        className={`fixed top-0 left-0 h-full bg-white w-64 p-4 poppins shadow-lg transform transition-transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } z-30`}
       >
         <div className="flex items-center mb-6">
-          <span role="img" aria-label="movie" className="text-2xl mr-2">
-            🎬
+          <span role="img" aria-label="movie" className="text-2xl mr-3">
+            <img src={Logo} alt="" className="w-12 h-12" />
           </span>
-          <h2 className="text-xl font-bold">MovieBox</h2>
+          <Link to="/" className="text-xl text-black poppins font-bold">
+            {" "}
+            MovieBox
+          </Link>
           <button
             onClick={() => setSidebarOpen(false)}
             className="ml-auto text-black focus:outline-none"

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -37,4 +39,11 @@
 
 .thng{
   color: #000000fb;
+}
+.dm-sans {
+  font-family: "DM Sans", sans-serif;
+
+}
+.poppins {
+  font-family: "Poppins", sans-serif;
 }

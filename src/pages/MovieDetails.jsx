@@ -2,10 +2,18 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import PreLoader from "../components/PreLoader";
+import Tickets from "../assets/tickets.png";
+import List from "../assets/list.png";
 import NoImg from "../assets/no-image.png"; 
+import MoreShows from "../assets/more-shows.png"; // Assuming you have a more shows image
 function MovieDetail() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
+  const [credits, setCredits] = useState({
+    director: "Unknown",
+    writer: "Unknown",
+    stars: ["Unknown"],
+  });
   const [trailerKey, setTrailerKey] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -43,6 +51,37 @@ function MovieDetail() {
     fetchMovieDetails();
   }, [id, apiKey, apiUrl]);
 
+  useEffect(() => {
+    const fetchCredits = async () => {
+      try {
+        const response = await axios.get(
+          `${apiUrl}/movie/${id}/credits?api_key=${apiKey}`
+        );
+        const director =
+          response.data.crew.find((person) => person.job === "Director")
+            ?.name || "Unknown";
+        const writer =
+          response.data.crew.find(
+            (person) => person.job === "Writer" || person.job === "Screenplay"
+          )?.name || "Unknown";
+        // Fetch top 3 stars from the cast array
+        const stars = response.data.cast
+          .slice(0, 3)
+          .map((actor) => actor.name) || ["Unknown"];
+        setCredits({
+          director,
+          writer,
+          stars: stars.length > 0 ? stars : ["Unknown"],
+        });
+      }  catch (err) {
+        console.error("Failed to fetch credits:", err);
+        setCredits({ director: "Unknown", writer: "Unknown", star: "Unknown" });
+      }
+    };
+    fetchCredits();
+  }, [id, apiKey, apiUrl]);
+
+
   if (loading) return <PreLoader />;
   if (error)
     return <div className="text-center text-red-500 pt-4">{error}</div>;
@@ -50,8 +89,8 @@ function MovieDetail() {
     return <div className="text-center text-white pt-4">Movie not found.</div>;
 
   return (
-    <div className="min-h-screen bg-white text-[#333333]">
-      <div className="container mx-auto p-4 py-8">
+    <div className="min-h-screen bg-white text-[#333333] poppins">
+      <div className=" container mx-auto py-8 px-2 md:px-0">
         {/* Trailer or Fallback Image */}
         <div className="relative mb-8">
           {trailerKey ? (
@@ -77,17 +116,19 @@ function MovieDetail() {
         </div>
 
         {/* Movie Details */}
-        <div className="flex flex-col md:flex-row gap-6">
-          <div className="md:w-2/3">
-            <div className="flex items-center space-x-4 mb-4">
-              <h1 className="text-3xl font-bold mb-2 inline">{movie.title}</h1>
-              <span className="font-semibold text-xl">
+        <div className="flex flex-col lg:flex-row gap-6">
+          <div className="lg:w-3/4">
+            <div className="flex items-center space-x-3 md:space-x-4 mb-4 overflow-x-scroll">
+              <h1 className="xsm:text-base  md:text-3xl font-bold ">
+                {movie.title}
+              </h1> 
+              <span className="font-semibold text-sm md:text-xl">
                 • {movie.release_date?.split("-")[0]} •
               </span>
-              <span className="font-semibold text-xl">
+              <span className="font-semibold text-sm md:text-xl">
                 {movie.runtime ? `${movie.runtime} min` : "N/A"}
               </span>
-              <span className="font-semibold text-xl">
+              <span className="font-semibold text-sm md:text-xl">
                 • Genre •
               </span>
               <span>
@@ -95,7 +136,7 @@ function MovieDetail() {
                   ? movie.genres.map((genre) => (
                       <span
                         key={genre.id}
-                        className="border border-[#BE123C] rounded-3xl py-1 px-2 mx-1"
+                        className="border border-[#BE123C] rounded-3xl px-[2px] py-[2px] md:py-1 md:px-2 mr-[3px] md:mx-1 text-sm md:text-base"
                       >
                         {genre.name}
                       </span>
@@ -104,8 +145,26 @@ function MovieDetail() {
               </span>
             </div>
             <div className="mb-4">
-              <h2 className="text-2xl font-semibold">Overview</h2>
-              <p className="text-lg">{movie.overview || "No overview available."}</p>
+              <h2 className=" text-xl md:text-2xl font-semibold">Overview</h2>
+              <p className="text-base md:text-lg">
+                {movie.overview || "No overview available."}
+              </p>
+              <div className="mt-4 text-[#333] space-y-4">
+                <p>
+                  <span className="font-semibold">Director:</span>{" "}
+                  <span className="text-[#BE123C]">{credits.director}</span>
+                </p>
+                <p>
+                  <span className="font-semibold">Writer:</span>{" "}
+                  <span className="text-[#BE123C]">{credits.writer}</span>
+                </p>
+                <p>
+                  <span className="font-semibold">Stars:</span>{" "}
+                  <span className="text-[#BE123C]">
+                    {credits.stars.join(", ")}
+                  </span>
+                </p>
+              </div>
             </div>
             {movie.production_countries?.length > 0 && (
               <div className="mb-4">
@@ -119,17 +178,54 @@ function MovieDetail() {
             )}
             <Link
               to="/"
-              className="inline-block bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+              className="inline-block bg-[#BE123C] text-white px-4 py-2 rounded hover:bg-red-700"
             >
               Back to Home
             </Link>
           </div>
-          <div className="md:w-1/3">
-            <span className="pb-2">
-              <span className="text-yellow-400 text-2xl">★</span>{" "}
-              <span className="text-xl">{movie.vote_average.toFixed(1)}</span>
-              /10
-            </span>
+          <div className="lg:flex justify-center lg:w-1/4 hidden ">
+            <div className="max-w-2xl">
+              <div className="mb-5 flex justify-end">
+                <span className="pb-2">
+                  <span className="text-yellow-400 text-2xl">★</span>{" "}
+                  <span className="text-xl">
+                    {movie.vote_average.toFixed(1)}
+                  </span>
+                  /10
+                </span>
+              </div>
+              <div className="w-full mb-2">
+                <a
+                  href="# "
+                  className="rounded-lg w-full block bg-[#BE123C] px-7 py-3 text-white text-center font-semibold"
+                >
+                  <img
+                    src={Tickets}
+                    alt="Tickets"
+                    className="inline-block mr-2"
+                  />
+                  See Showtimes
+                </a>
+              </div>
+              <div className="w-full mb-2">
+                <a
+                  href="# "
+                  className="rounded-lg w-full block bg-[#be123c1a] px-7 py-3 text-[#333] text-center font-semibold border border-[#BE123C] "
+                >
+                  <img src={List} alt="Tickets" className="inline-block mr-2" />
+                  More watch options
+                </a>
+              </div>
+              <div className="w-full">
+                <a href="#">
+                  <img
+                    src={MoreShows}
+                    alt="Tickets"
+                    className="rounded w-full"
+                  />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
