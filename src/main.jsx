@@ -5,9 +5,10 @@ import App from "./App";
 import Home from "./pages/Home";
 import MovieList from "./pages/MovieList";
 import MovieDetails from "./pages/MovieDetails";
-// import Wishlist from "./pages/Wishlist";
-// import Login from "./pages/Login";
 import Layout from "./components/Layout";
+// import Wishlist from "./pages/Wishlist";
+import Signup from "./pages/SignUp";
+import Login from "./pages/Login";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -18,9 +19,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route index element={<Home />} />
           <Route path="movies" element={<MovieList />} />
           <Route path="movies/:id" element={<MovieDetails />} />
-          {/* <Route path="wishlist" element={<Wishlist />} />
-          <Route path="login" element={<Login />} /> */}
+          {/* <Route path="wishlist" element={<Wishlist />} />*/}
         </Route>
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

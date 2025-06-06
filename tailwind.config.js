@@ -7,8 +7,8 @@ export default {
     theme: {
         extend: {
             screens: {
-                xsm: "400px", // Now you can use `tablet:` as a prefix
-              },
+                xs: "480px", // Now you can use `tablet:` as a prefix
+            },
         },
     },
     plugins: [],

@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import "tailwindcss";
 
+@theme {
+  --breakpoint-xs: 30rem;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -33,17 +37,19 @@
   bottom: 0px !important;
 }
 
-.slick-dots li button:before{
-  color:white !important;
+.slick-dots li button:before {
+  color: white !important;
 }
 
-.thng{
+.thng {
   color: #000000fb;
 }
+
 .dm-sans {
   font-family: "DM Sans", sans-serif;
 
 }
+
 .poppins {
   font-family: "Poppins", sans-serif;
 }

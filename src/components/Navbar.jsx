@@ -5,7 +5,10 @@ import { auth } from "../../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import Logo from "../assets/tv.png";
 import { FaBars } from "react-icons/fa";
-
+import { FaVideo } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
+import { FaCalendarAlt } from "react-icons/fa";
 
 function Navbar() {
   const [user, setUser] = useState(null);
@@ -135,7 +138,9 @@ function Navbar() {
       <div className="flex items-center space-x-[5px] sm:space-x-4">
         <div>
           {user ? (
-            <span className="text-white">{user.displayName || user.email}</span>
+            <span className="text-white">
+              {user.displayName || (user.email ? user.email.slice(0, 4) : "")}
+            </span>
           ) : (
             <Link to="/login" className=" text-white sm:px-2 ">
               Sign In
@@ -220,11 +225,11 @@ function Navbar() {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full bg-white w-64 p-4 poppins shadow-lg transform transition-transform ${
+        className={`fixed top-0 left-0 h-full bg-white w-58  rounded-tr-[45px] rounded-br-[45px] border border-black/30 poppins shadow-lg transform transition-transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } z-30`}
       >
-        <div className="flex items-center mb-6">
+        <div className="flex items-center mb-6 p-4">
           <span role="img" aria-label="movie" className="text-2xl mr-3">
             <img src={Logo} alt="" className="w-12 h-12" />
           </span>
@@ -252,95 +257,43 @@ function Navbar() {
             </svg>
           </button>
         </div>
-        <nav className="space-y-4">
+        <nav className=" w-full  ">
           <Link
             to="/"
-            className="flex items-center space-x-2 text-gray-700 hover:text-red-600"
+            className="flex items-center justify-center space-x-4 text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300"
             onClick={() => setSidebarOpen(false)}
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M3 12l2-2m0 0l7-7 7 7m-9 9l-2 2m2-2l7-7m-4 7v-8m-4 4h.01"
-              />
-            </svg>
+            <FaHome className="w-5 h-5" />
             <span>Home</span>
           </Link>
           <Link
             to="/movies"
-            className="flex items-center space-x-2 text-gray-700 hover:text-red-600"
+            className="flex items-center justify-center space-x-4 text-gray-700  hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300"
             onClick={() => setSidebarOpen(false)}
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M7 4v16m10-16v16M3 8h18M3 16h18"
-              />
-            </svg>
+            <FaVideo className="w-5 h-5" />
             <span>Movies</span>
           </Link>
           <Link
             to="/tv-series"
-            className="flex items-center space-x-2 text-gray-700 hover:text-red-600"
+            className="flex items-center space-x-4 justify-center text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300"
             onClick={() => setSidebarOpen(false)}
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 5v14l7-7-7-7z"
-              />
-            </svg>
+            <FaYoutube className="w-5 h-5" />
             <span>TV Series</span>
           </Link>
           <Link
             to="/upcoming"
-            className="flex items-center space-x-2 text-gray-700 hover:text-red-600"
+            className="flex items-center space-x-4 justify-center text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300"
             onClick={() => setSidebarOpen(false)}
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+            <FaCalendarAlt className="w-5 h-5" />
             <span>Upcoming</span>
           </Link>
           {user && (
             <Link
               to="/wishlist"
-              className="flex items-center space-x-2 text-gray-700 hover:text-red-600"
+              className="flex items-center justify-center space-x-4 text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300"
               onClick={() => setSidebarOpen(false)}
             >
               <svg
@@ -360,14 +313,21 @@ function Navbar() {
               <span>Wishlist</span>
             </Link>
           )}
-          <div className="bg-red-100 p-4 rounded-lg mt-4">
+          <div className="bg-[#F8E7EB66] p-4 m-4 rounded-xl mt-4 border border-[#BE123CB2]">
             <p className="text-sm text-gray-600">
               Play movie quizzes and earn free tickets
             </p>
-            <p className="text-sm text-gray-600">50 people are playing now</p>
-            <button className="mt-2 w-full bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
-              Start Playing
-            </button>
+            <p className="text-[12px] text-gray-600">
+              50 people are playing now
+            </p>
+            <div className="flex items-center justify-center">
+              <button
+                className="mt-2 w-3/4 mx-auto bg-[#BE123C33] text-[#BE123C] px-4 py-2 
+            rounded-3xl text-[12px] cursor-pointer hover:bg-[#BE123C66] transition-colors duration-300"
+              >
+                Start Playing
+              </button>
+            </div>
           </div>
           {user ? (
             <button
@@ -375,7 +335,7 @@ function Navbar() {
                 handleSignOut();
                 setSidebarOpen(false);
               }}
-              className="flex items-center space-x-2 text-gray-700 hover:text-red-600 mt-4"
+              className="flex items-center justify-center space-x-4 text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300 mt-4"
             >
               <svg
                 className="w-5 h-5"
@@ -396,7 +356,7 @@ function Navbar() {
           ) : (
             <Link
               to="/login"
-              className="flex items-center space-x-2 text-gray-700 hover:text-red-600 mt-4"
+              className="flex items-center justify-center space-x-4 text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300 mt-7"
               onClick={() => setSidebarOpen(false)}
             >
               <svg

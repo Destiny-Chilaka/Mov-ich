@@ -90,7 +90,7 @@ function MovieDetail() {
 
   return (
     <div className="min-h-screen bg-white text-[#333333] poppins">
-      <div className=" container mx-auto py-8 px-2 md:px-0">
+      <div className="mx-auto  px-6 py-8">
         {/* Trailer or Fallback Image */}
         <div className="relative mb-8">
           {trailerKey ? (
@@ -118,25 +118,23 @@ function MovieDetail() {
         {/* Movie Details */}
         <div className="flex flex-col lg:flex-row gap-6">
           <div className="lg:w-3/4">
-            <div className="flex items-center space-x-3 md:space-x-4 mb-4 overflow-x-scroll">
-              <h1 className="xsm:text-base  md:text-3xl font-bold ">
+            <div className="flex items-center space-x-3 md:space-x-4 mb-4 flex-col xs:flex-row space-y-1.5 xs:space-y-0">
+              <h1 className=" xs:text-sm sm:text-3xl font-bold ">
                 {movie.title}
               </h1> 
-              <span className="font-semibold text-sm md:text-xl">
-                • {movie.release_date?.split("-")[0]} •
+              <span className="font-semibold text-sm  ">
+                 {movie.release_date?.split("-")[0]} 
               </span>
-              <span className="font-semibold text-sm md:text-xl">
+              <span className="font-semibold text-sm  ">
                 {movie.runtime ? `${movie.runtime} min` : "N/A"}
               </span>
-              <span className="font-semibold text-sm md:text-xl">
-                • Genre •
-              </span>
+              
               <span>
                 {movie.genres && movie.genres.length > 0
                   ? movie.genres.map((genre) => (
                       <span
                         key={genre.id}
-                        className="border border-[#BE123C] rounded-3xl px-[2px] py-[2px] md:py-1 md:px-2 mr-[3px] md:mx-1 text-sm md:text-base"
+                        className="border border-[#BE123C] rounded-3xl px-[2px] py-[2px] md:py-1 md:px-2 mr-[3px] md:mx-1 text-[12px] md:text-base "
                       >
                         {genre.name}
                       </span>
@@ -146,7 +144,7 @@ function MovieDetail() {
             </div>
             <div className="mb-4">
               <h2 className=" text-xl md:text-2xl font-semibold">Overview</h2>
-              <p className="text-base md:text-lg">
+              <p className="text-[12px] sm:text-base">
                 {movie.overview || "No overview available."}
               </p>
               <div className="mt-4 text-[#333] space-y-4">

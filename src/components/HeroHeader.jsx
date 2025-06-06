@@ -3,9 +3,15 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import Slider from "react-slick";
 import tomato from "../assets/tomato.png"; // Placeholder for tomato image
-import movieLogo from "../assets/tv.png"; // Placeholder for logo
+import movieLogo from "../assets/tv.png";
+import Logo from "../assets/tv.png"; 
 import { FaPlay } from "react-icons/fa";
 import { FaBars } from "react-icons/fa";
+import { FaVideo } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
+import { FaCalendarAlt } from "react-icons/fa";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { auth } from "../../firebase";
@@ -147,14 +153,17 @@ function HeroHeader({ onLoadingChange }) {
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
               <div className="container mx-auto p-4 text-white relative z-10">
                 <nav className="flex justify-between items-center mb-8 ">
-                  <div className="text-sm sm:text-xl font-bold items-center flex gap-1 sm:gap-3">
+                  <Link
+                    to="/"
+                    className="text-sm sm:text-xl font-bold items-center flex gap-1 sm:gap-3"
+                  >
                     <img
                       src={movieLogo}
                       alt="Movie Logo"
                       className="h-6 w-6 sm:h-12 sm:w-12"
                     />
                     MovieBox
-                  </div>
+                  </Link>
 
                   {/* Normal search input for md+ screens */}
                   <div className="flex items-center">
@@ -220,11 +229,12 @@ function HeroHeader({ onLoadingChange }) {
                     <div>
                       {user ? (
                         <span className="text-white">
-                          {user.displayName || user.email}
+                          {user.displayName ||
+                            (user.email ? user.email.slice(0, 4) : "")}
                         </span>
                       ) : (
                         <Link
-                          to="/login"
+                          to="/Login"
                           className=" text-white text-sm sm:text-base "
                         >
                           Sign In
@@ -260,12 +270,15 @@ function HeroHeader({ onLoadingChange }) {
                   <p className="max-w-lg text-sm sm:text-base">
                     {movie.overview}
                   </p>
-                  <button className="bg-[#BE123C] text-white px-4 py-2 rounded-md mt-4 flex gap-2 items-center">
+                  <Link
+                    to={`/movies/${movie.id}`}
+                    className="bg-[#BE123C] text-white px-4 py-2 rounded-md mt-4 flex gap-2 items-center cursor-pointer w-52"
+                  >
                     <div className="flex items-center justify-center w-5 h-5 bg-white text-[#BE123C] rounded-full">
                       <FaPlay className="w-2 h-2" />
                     </div>
                     WATCH TRAILER
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -343,15 +356,18 @@ function HeroHeader({ onLoadingChange }) {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full bg-white w-64 p-4 shadow-lg transform transition-transform ${
+        className={`fixed top-0 left-0 h-full bg-white w-58  rounded-tr-[45px] rounded-br-[45px] border border-black/30 poppins shadow-lg transform transition-transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } z-30`}
       >
-        <div className="flex items-center mb-6">
-          <span role="img" aria-label="movie" className="text-2xl mr-2">
-            🎬
+        <div className="flex items-center mb-2 p-4">
+          <span role="img" aria-label="movie" className="text-2xl mr-3">
+            <img src={Logo} alt="" className="w-12 h-12" />
           </span>
-          <h2 className="text-xl font-bold">MovieBox</h2>
+          <Link to="/" className="text-xl text-black poppins font-bold">
+            {" "}
+            MovieBox
+          </Link>
           <button
             onClick={() => setSidebarOpen(false)}
             className="ml-auto text-black focus:outline-none"
@@ -372,99 +388,77 @@ function HeroHeader({ onLoadingChange }) {
             </svg>
           </button>
         </div>
-        <nav className="space-y-4">
+        <nav className=" w-full  ">
           <Link
             to="/"
-            className="flex items-center space-x-2 text-gray-700 hover:text-red-600"
+            className="flex items-center justify-center space-x-4 text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-4 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300"
             onClick={() => setSidebarOpen(false)}
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M3 12l2-2m0 0l7-7 7 7m-9 9l-2 2m2-2l7-7m-4 7v-8m-4 4h.01"
-              />
-            </svg>
+            <FaHome className="w-5 h-5" />
             <span>Home</span>
           </Link>
           <Link
             to="/movies"
-            className="flex items-center space-x-2 text-gray-700 hover:text-red-600"
+            className="flex items-center justify-center space-x-4 text-gray-700  hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300"
             onClick={() => setSidebarOpen(false)}
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M7 4v16m10-16v16M3 8h18M3 16h18"
-              />
-            </svg>
+            <FaVideo className="w-5 h-5" />
             <span>Movies</span>
           </Link>
           <Link
             to="/tv-series"
-            className="flex items-center space-x-2 text-gray-700 hover:text-red-600"
+            className="flex items-center space-x-4 justify-center text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300"
             onClick={() => setSidebarOpen(false)}
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 5v14l7-7-7-7z"
-              />
-            </svg>
+            <FaYoutube className="w-5 h-5" />
             <span>TV Series</span>
           </Link>
           <Link
             to="/upcoming"
-            className="flex items-center space-x-2 text-gray-700 hover:text-red-600"
+            className="flex items-center space-x-4 justify-center text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300"
             onClick={() => setSidebarOpen(false)}
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+            <FaCalendarAlt className="w-5 h-5" />
             <span>Upcoming</span>
           </Link>
-          <div className="bg-red-100 p-4 rounded-lg mt-4">
+          {user && (
+            <Link
+              to="/wishlist"
+              className="flex items-center justify-center space-x-4 text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300"
+              onClick={() => setSidebarOpen(false)}
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+              <span>Wishlist</span>
+            </Link>
+          )}
+          <div className="bg-[#F8E7EB66] p-4 m-4 rounded-xl mt-4 border border-[#BE123CB2]">
             <p className="text-sm text-gray-600">
               Play movie quizzes and earn free tickets
             </p>
-            <p className="text-sm text-gray-600">50 people are playing now</p>
-            <button className="mt-2 w-full bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
-              Start Playing
-            </button>
+            <p className="text-[12px] text-gray-600">
+              50 people are playing now
+            </p>
+            <div className="flex items-center justify-center">
+              <button
+                className="mt-2 w-3/4 mx-auto bg-[#BE123C33] text-[#BE123C] px-4 py-2 
+                 rounded-3xl text-[12px] cursor-pointer hover:bg-[#BE123C66] transition-colors duration-300"
+              >
+                Start Playing
+              </button>
+            </div>
           </div>
           {user ? (
             <button
@@ -472,7 +466,7 @@ function HeroHeader({ onLoadingChange }) {
                 handleSignOut();
                 setSidebarOpen(false);
               }}
-              className="flex items-center space-x-2 text-gray-700 hover:text-red-600 mt-4"
+              className="flex items-center justify-center space-x-4 text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300 mt-4"
             >
               <svg
                 className="w-5 h-5"
@@ -493,7 +487,7 @@ function HeroHeader({ onLoadingChange }) {
           ) : (
             <Link
               to="/login"
-              className="flex items-center space-x-2 text-gray-700 hover:text-red-600 mt-4"
+              className="flex items-center justify-center space-x-4 text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300 mt-7"
               onClick={() => setSidebarOpen(false)}
             >
               <svg

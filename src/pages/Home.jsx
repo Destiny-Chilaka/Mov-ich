@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import HeroHeader from "../components/HeroHeader";
 import UpcomingMovies from "../components/UpcomingMovies";
 import PopularMovies from "../components/PopularMovies";
-import TopRatedMovies from "../components/TopRatedMovies";
+import NowPlayingMovies from "../components/NowPlayingMovies";
 import PreLoader from "../components/PreLoader";
 
 function Home() {
@@ -10,7 +10,7 @@ function Home() {
     heroHeader: true,
     upcomingMovies: true,
     popularMovies: true,
-    topRatedMovies: true,
+    NowPlayingMovies: true,
   });
 
   const handleLoadingChange = useCallback(
@@ -55,9 +55,9 @@ function Home() {
             handleLoadingChange("popularMovies", loading)
           }
         />
-        <TopRatedMovies
+        <NowPlayingMovies
           onLoadingChange={(loading) =>
-            handleLoadingChange("topRatedMovies", loading)
+            handleLoadingChange("NowPlayingMovies", loading)
           }
         />
       </div>
