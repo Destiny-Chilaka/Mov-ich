@@ -43,7 +43,7 @@ function MoviesList() {
   return (
     <div className="min-h-screen bg-white py-8">
       <div className="container mx-auto p-4">
-        <h1 className="text-3xl font-bold text-white mb-6">
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">
           {query ? `Showing results for "${query}"` : "Movies"}
         </h1>
         {movies.length === 0 ? (

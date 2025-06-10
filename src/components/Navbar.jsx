@@ -229,7 +229,7 @@ function Navbar() {
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } z-30`}
       >
-        <div className="flex items-center mb-6 p-4">
+        <div className="flex items-center mb-2 px-4 pt-3">
           <span role="img" aria-label="movie" className="text-2xl mr-3">
             <img src={Logo} alt="" className="w-12 h-12" />
           </span>
@@ -321,12 +321,13 @@ function Navbar() {
               50 people are playing now
             </p>
             <div className="flex items-center justify-center">
-              <button
+              <Link
+              to="/quizzes"
                 className="mt-2 w-3/4 mx-auto bg-[#BE123C33] text-[#BE123C] px-4 py-2 
             rounded-3xl text-[12px] cursor-pointer hover:bg-[#BE123C66] transition-colors duration-300"
               >
                 Start Playing
-              </button>
+              </Link>
             </div>
           </div>
           {user ? (
@@ -335,7 +336,8 @@ function Navbar() {
                 handleSignOut();
                 setSidebarOpen(false);
               }}
-              className="flex items-center justify-center space-x-4 text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300 mt-4"
+              className="flex items-center justify-center space-x-4 text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300 mt-4
+              mx-auto w-full rounded-br-[45px]"
             >
               <svg
                 className="w-5 h-5"

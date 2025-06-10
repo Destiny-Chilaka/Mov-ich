@@ -20,7 +20,7 @@ function PopularMovies({ onLoadingChange }) {
           `${apiUrl}/movie/popular?api_key=${apiKey}&language=en-US&page=1`
         );
         if (isMounted) {
-          setMovies(movieResponse.data.results.slice(0, 8));
+          setMovies(movieResponse.data.results.slice(0, 4));
           setLoading(false);
         }
       } catch (err) {
@@ -52,7 +52,7 @@ function PopularMovies({ onLoadingChange }) {
     <div className="container mx-auto p-4 py-8 dm-sans">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold text-black">Popular Movies</h2>
-        <a href="/movies" className="text-red-600 hover:underline">
+        <a href="/popular" className="text-red-600 hover:underline">
           See more {" > "}
         </a>
       </div>

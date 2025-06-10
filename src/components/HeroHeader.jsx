@@ -360,7 +360,7 @@ function HeroHeader({ onLoadingChange }) {
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } z-30`}
       >
-        <div className="flex items-center mb-2 p-4">
+        <div className="flex items-center mb-2 px-4 pt-3">
           <span role="img" aria-label="movie" className="text-2xl mr-3">
             <img src={Logo} alt="" className="w-12 h-12" />
           </span>
@@ -391,7 +391,7 @@ function HeroHeader({ onLoadingChange }) {
         <nav className=" w-full  ">
           <Link
             to="/"
-            className="flex items-center justify-center space-x-4 text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-4 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300"
+            className="flex items-center justify-center space-x-4 text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300"
             onClick={() => setSidebarOpen(false)}
           >
             <FaHome className="w-5 h-5" />
@@ -452,12 +452,13 @@ function HeroHeader({ onLoadingChange }) {
               50 people are playing now
             </p>
             <div className="flex items-center justify-center">
-              <button
+              <Link
+              to="/quizzes"
                 className="mt-2 w-3/4 mx-auto bg-[#BE123C33] text-[#BE123C] px-4 py-2 
                  rounded-3xl text-[12px] cursor-pointer hover:bg-[#BE123C66] transition-colors duration-300"
               >
                 Start Playing
-              </button>
+              </Link>
             </div>
           </div>
           {user ? (
@@ -466,7 +467,7 @@ function HeroHeader({ onLoadingChange }) {
                 handleSignOut();
                 setSidebarOpen(false);
               }}
-              className="flex items-center justify-center space-x-4 text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300 mt-4"
+              className="flex items-center justify-center space-x-4 text-gray-700 hover:bg-[#BE123C1A] hover:text-[#BE123C] py-4 md:py-6 text-center border-r-6 border-white hover:border-[#BE123C] transition-colors duration-300 mt-4 mx-auto w-full rounded-br-[45px]"
             >
               <svg
                 className="w-5 h-5"

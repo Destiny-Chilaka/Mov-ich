@@ -20,7 +20,7 @@ function UpcomingMovies({ onLoadingChange }) {
           `${apiUrl}/movie/upcoming?api_key=${apiKey}&language=en-US&page=1`
         );
         if (isMounted) {
-          const upcomingMovies = movieResponse.data.results.slice(0, 8);
+          const upcomingMovies = movieResponse.data.results.slice(0, 4);
           setMovies(upcomingMovies);
           setLoading(false);
         }
@@ -53,7 +53,7 @@ function UpcomingMovies({ onLoadingChange }) {
     <div className="container mx-auto p-4 py-8 dm-sans">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold text-black">Upcoming Movies</h2>
-        <a href="/movies" className="text-red-600 hover:underline">
+        <a href="/upcoming" className="text-red-600 hover:underline">
           See more {" > "}
         </a>
       </div>
