@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import MovieCard from "./MovieCard";
 import PreLoader from "./PreLoader";
+import { Link} from "react-router-dom";
 
 function PopularMovies({ onLoadingChange }) {
   const [movies, setMovies] = useState([]);
@@ -52,9 +53,9 @@ function PopularMovies({ onLoadingChange }) {
     <div className="container mx-auto p-4 py-8 dm-sans">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold text-black">Popular Movies</h2>
-        <a href="/popular" className="text-red-600 hover:underline">
+        <Link href="/popular" className="text-red-600 hover:underline">
           See more {" > "}
-        </a>
+        </Link>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {movies.map((movie) => (
