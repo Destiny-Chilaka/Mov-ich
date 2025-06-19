@@ -53,7 +53,7 @@ function PopularMovies({ onLoadingChange }) {
     <div className="container mx-auto p-4 py-8 dm-sans">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold text-black">Popular Movies</h2>
-        <Link href="/popular" className="text-red-600 hover:underline">
+        <Link to="/popular" className="text-red-600 hover:underline">
           See more {" > "}
         </Link>
       </div>

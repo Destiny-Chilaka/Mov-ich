@@ -54,7 +54,7 @@ function UpcomingMovies({ onLoadingChange }) {
     <div className="container mx-auto p-4 py-8 dm-sans">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold text-black">Upcoming Movies</h2>
-        <Link href="/upcoming" className="text-red-600 hover:underline">
+        <Link to="/upcoming" className="text-red-600 hover:underline">
           See more {" > "}
         </Link>
       </div>
